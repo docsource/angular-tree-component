@@ -4,7 +4,6 @@ import { TreeNode } from '../models/tree-node.model';
 @Component({
   selector: 'TreeNodeExpander, tree-node-expander',
   encapsulation: ViewEncapsulation.None,
-  styles: [],
   template: `
     <ng-container *mobxAutorun>
       <span
