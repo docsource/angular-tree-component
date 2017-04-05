@@ -158,7 +158,7 @@ export class TreeNode implements ITreeNode {
   onDrop($event) {
     this.mouseAction('drop', $event.event, {
       from: $event.element,
-      to: { parent: this, index: 0 }
+      to: { parent: this, index: this.children.length }
     });
   }
 
