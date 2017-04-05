@@ -179,7 +179,7 @@ export class TreeNode implements ITreeNode {
   onDrop($event) {
     this.mouseAction('drop', $event.event, {
       from: $event.element,
-      to: { parent: this, index: 0, dropOnNode: true }
+      to: { parent: this, index: (this.children && this.children.length) || 0, dropOnNode: true }
     });
   }
 
@@ -190,7 +190,6 @@ export class TreeNode implements ITreeNode {
   allowDrag() {
     return this.options.allowDrag(this);
   }
-
 
   // helper methods:
   loadNodeChildren() {
