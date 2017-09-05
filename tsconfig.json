@@ -12,9 +12,7 @@
     "skipLibCheck": true,
     "lib": ["es2015", "dom"]
   },
-  "files": [
-    "lib/angular-tree-component"
-  ],
+  "include": ["lib"],
   "compileOnSave": false,
   "buildOnSave": false,
   "angularCompilerOptions": {

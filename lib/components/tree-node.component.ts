@@ -19,7 +19,10 @@ import { deprecatedSelector } from '../deprecated-selector';
 
         <tree-node-drop-slot *ngIf="index === 0" [dropIndex]="node.index" [node]="node.parent"></tree-node-drop-slot>
 
-          <div class="node-wrapper" [style.padding-left]="node.getNodePadding()">
+          <div class="node-wrapper"
+            [style.padding-left]="node.getNodePadding()"
+            [class.matchesFilter]="!!node.data.matchesFilter"
+            [class.containsMatch]="!!node.data.containsMatch">
             <tree-node-expander [node]="node"></tree-node-expander>
             <div class="node-content-wrapper"
               (click)="node.mouseAction('click', $event)"
@@ -57,5 +60,4 @@ export class TreeNodeComponent {
   get nodeHasChildren(){
     return this.node.children && this.node.children.length > 0;
   }
-
 }

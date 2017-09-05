@@ -18,7 +18,8 @@ import { deprecatedSelector } from '../deprecated-selector';
     <tree-viewport>
       <div
         class="tree"
-        [class.node-dragging]="treeDraggedElement.isDragging()">
+        [class.node-dragging]="treeDraggedElement.isDragging()"
+        [class.filtering]="treeModel.isFiltering">
         <tree-node-collection
           *ngIf="treeModel.roots"
           [nodes]="treeModel.roots"
