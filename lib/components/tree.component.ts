@@ -20,6 +20,7 @@ const { includes, pick }  = _;
       <div
         class="angular-tree-component"
         [class.node-dragging]="treeDraggedElement.isDragging()"
+        [class.filtering]="treeModel.isFiltering"
         [class.angular-tree-component-rtl]="treeModel.options.rtl">
         <tree-node-collection
           *ngIf="treeModel.roots"
