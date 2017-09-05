@@ -27,6 +27,10 @@ export class TreeModel implements ITreeModel {
   @observable focusedNodeId: IDType = null;
   @observable virtualRoot: TreeNode;
 
+  isFiltering = false;
+  beginFilterCallback: () => void | null = null;
+  endFilterCallback: () => void | null = null;
+
   private firstUpdate = true;
   private events: any;
 
@@ -344,6 +348,37 @@ export class TreeModel implements ITreeModel {
     this.roots.forEach((node) => this._filterNode(ids, node, filterFn, autoShow));
     this.hiddenNodeIds = ids;
     this.fireEvent({ eventName: TREE_EVENTS.changeFilter });
+  }
+
+  @action setClassFilter(filter: ((node: any) => boolean) | null) {
+    if (this.isFiltering !== !!filter) {
+      this.isFiltering = !!filter;
+      if (this.isFiltering) {
+        // Rising edge
+        if (this.beginFilterCallback) this.beginFilterCallback();
+      }
+      else {
+        // Falling edge
+        if (this.endFilterCallback) this.endFilterCallback();
+      }
+    }
+
+    let matches: any[] = [];
+
+    this.doForAll((node) => {
+      let matchesFilter = !!(filter ? filter(node) : true);
+      node.data.matchesFilter = matchesFilter;
+      node.data.containsMatch = false;
+      if (matchesFilter) matches.push(node);
+    });
+
+    for (let match of matches) {
+      let parent: any = match.parent;
+      while (parent) {
+        parent.data.containsMatch = true;
+        parent = parent.parent;
+      }
+    }
   }
 
   @action clearFilter() {

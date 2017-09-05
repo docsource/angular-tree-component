@@ -6,7 +6,13 @@ import { TreeNode } from '../models/tree-node.model';
   encapsulation: ViewEncapsulation.None,
   styles: [],
   template: `
-      <div *ngIf="!templates.treeNodeWrapperTemplate" class="node-wrapper" [style.padding-left]="node.getNodePadding()">
+      <div
+        *ngIf="!templates.treeNodeWrapperTemplate"
+        class="node-wrapper"
+        [style.padding-left]="node.getNodePadding()"
+        [class.matchesFilter]="!!node.data.matchesFilter"
+        [class.containsMatch]="!!node.data.containsMatch">
+        
         <tree-node-checkbox *ngIf="node.options.useCheckbox" [node]="node"></tree-node-checkbox>
         <tree-node-expander [node]="node"></tree-node-expander>
         <div class="node-content-wrapper"
