@@ -30,9 +30,14 @@ export class TreeModel implements ITreeModel {
   isFiltering = false;
   beginFilterCallback: () => void | null = null;
   endFilterCallback: () => void | null = null;
+  canFocusNode: (node: any) => boolean;
 
   private firstUpdate = true;
   private events: any;
+
+  constructor() {
+    this.canFocusNode = () => true;
+  }
 
   // events
   fireEvent(event) {
@@ -44,7 +49,6 @@ export class TreeModel implements ITreeModel {
   subscribe(eventName, fn) {
     this.events[eventName].subscribe(fn);
   }
-
 
   // getters
   getFocusedNode(): TreeNode {
@@ -214,13 +218,29 @@ export class TreeModel implements ITreeModel {
   @action focusNextNode() {
     let previousNode = this.getFocusedNode();
     let nextNode = previousNode ? previousNode.findNextNode(true, true) : this.getFirstRoot(true);
-    if (nextNode) nextNode.focus();
+    while (nextNode) {
+      if (!this.canFocusNode(nextNode)) {
+        nextNode = nextNode.findNextNode(true, true);
+      }
+      else {
+        nextNode.focus();
+        break;
+      }
+    }
   }
 
   @action focusPreviousNode() {
     let previousNode = this.getFocusedNode();
     let nextNode = previousNode ? previousNode.findPreviousNode(true) : this.getLastRoot(true);
-    if (nextNode) nextNode.focus();
+    while (nextNode) {
+      if (!this.canFocusNode(nextNode)) {
+        nextNode = nextNode.findPreviousNode(true, true);
+      }
+      else {
+        nextNode.focus();
+        break;
+      }
+    }
   }
 
   @action focusDrillDown() {
