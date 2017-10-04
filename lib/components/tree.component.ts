@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, OnChanges, EventEmitter, Renderer, ElementRef,
-  ViewEncapsulation, ContentChild, TemplateRef, HostListener
+  ViewEncapsulation, ContentChild, TemplateRef, HostListener, ViewChild
 } from '@angular/core';
 import { TreeModel } from '../models/tree.model';
 import { TreeNode } from '../models/tree-node.model';
@@ -15,6 +15,7 @@ import { deprecatedSelector } from '../deprecated-selector';
   encapsulation: ViewEncapsulation.None,
   providers: [TreeModel],
   template: `
+  <div tabindex="0" style="outline: none !important;" #focusEl>
     <tree-viewport>
       <div
         class="tree"
@@ -37,6 +38,7 @@ import { deprecatedSelector } from '../deprecated-selector';
         </tree-node-drop-slot>
       </div>
     </tree-viewport>
+  </div>
   `
 })
 export class TreeComponent implements OnChanges {
@@ -46,6 +48,8 @@ export class TreeComponent implements OnChanges {
   @ContentChild('loadingTemplate') loadingTemplate: TemplateRef<any>;
   @ContentChild('treeNodeTemplate') treeNodeTemplate: TemplateRef<any>;
   @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>;
+
+  @ViewChild('focusEl') focusEl: ElementRef;
 
   // Will be handled in ngOnChanges
   @Input() set nodes(nodes: any[]) { };
@@ -71,11 +75,11 @@ export class TreeComponent implements OnChanges {
     public treeModel: TreeModel,
     public treeDraggedElement: TreeDraggedElement,
     private renderer: Renderer,
-    private elementRef: ElementRef) {
-
+    private elementRef: ElementRef
+  ) {
       deprecatedSelector('Tree', 'tree-root', elementRef);
       treeModel.eventNames.forEach((name) => this[name] = new EventEmitter());
-  }
+    }
 
   @HostListener('body: keydown', ['$event'])
   onKeydown($event) {
@@ -103,5 +107,10 @@ export class TreeComponent implements OnChanges {
       nodes: changes.nodes && changes.nodes.currentValue,
       events: pick(this, this.treeModel.eventNames)
     });
+  }
+
+  ngAfterViewInit() {
+    console.log(this.focusEl);
+    this.treeModel.focusElement = this.focusEl.nativeElement;
   }
 }

@@ -29,6 +29,8 @@ export class TreeModel implements ITreeModel {
   endFilterCallback: () => void | null = null;
   canFocusNode: (node: any) => boolean;
 
+  focusElement: HTMLElement | null = null;
+
   private firstUpdate = true;
   private events: any;
 
@@ -75,6 +77,7 @@ export class TreeModel implements ITreeModel {
   }
 
   get isFocused() {
+    if (this.focusElement && document.activeElement !== this.focusElement) return false;
     return TreeModel.focusedTree === this;
   }
 
