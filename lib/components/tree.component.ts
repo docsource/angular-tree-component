@@ -1,5 +1,5 @@
 import {
-  Component, Input, Output, OnChanges, EventEmitter, Renderer,
+  Component, Input, Output, OnChanges, EventEmitter, Renderer, ElementRef,
   ViewEncapsulation, ContentChild, TemplateRef, HostListener, ViewChild
 } from '@angular/core';
 import { TreeModel } from '../models/tree.model';
@@ -16,6 +16,7 @@ const { includes, pick }  = _;
   selector: 'Tree, tree-root',
   providers: [TreeModel],
   template: `
+  <div tabindex="0" style="outline: none !important;" #focusEl>
     <tree-viewport #viewport>
       <div
         class="angular-tree-component"
@@ -41,6 +42,7 @@ const { includes, pick }  = _;
         </tree-node-drop-slot>
       </div>
     </tree-viewport>
+  </div>
   `
 })
 export class TreeComponent implements OnChanges {
@@ -51,7 +53,9 @@ export class TreeComponent implements OnChanges {
   @ContentChild('treeNodeTemplate') treeNodeTemplate: TemplateRef<any>;
   @ContentChild('treeNodeWrapperTemplate') treeNodeWrapperTemplate: TemplateRef<any>;
   @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>;
+
   @ViewChild('viewport') viewportComponent: TreeViewportComponent;
+  @ViewChild('focusEl') focusEl: ElementRef;
 
   // Will be handled in ngOnChanges
   @Input() set nodes(nodes: any[]) { };
@@ -84,8 +88,8 @@ export class TreeComponent implements OnChanges {
   constructor(
     public treeModel: TreeModel,
     public treeDraggedElement: TreeDraggedElement,
-    private renderer: Renderer) {
-
+    private renderer: Renderer
+  ) {
       treeModel.eventNames.forEach((name) => this[name] = new EventEmitter());
       treeModel.subscribeToState((state) => this.stateChange.emit(state));
   }
@@ -120,5 +124,9 @@ export class TreeComponent implements OnChanges {
 
   sizeChanged() {
     this.viewportComponent.setViewport();
+  }
+  
+  ngAfterViewInit() {
+    this.treeModel.focusElement = this.focusEl.nativeElement;
   }
 }
