@@ -110,7 +110,6 @@ export class TreeComponent implements OnChanges {
   }
 
   ngAfterViewInit() {
-    console.log(this.focusEl);
     this.treeModel.focusElement = this.focusEl.nativeElement;
   }
 }
