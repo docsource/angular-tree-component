@@ -7,7 +7,7 @@ import { deprecatedSelector } from '../deprecated-selector';
   template: `
     <ng-template
       [ngTemplateOutlet]="template"
-      [ngOutletContext]="{ $implicit: node }">
+      [ngTemplateOutletContext]="{ $implicit: node }">
     </ng-template>
   `,
 })
