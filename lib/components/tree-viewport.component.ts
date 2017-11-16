@@ -4,7 +4,7 @@ import {
 import { TreeVirtualScroll } from '../models/tree-virtual-scroll.model';
 import { deprecatedSelector } from '../deprecated-selector';
 
-import { throttle } from 'lodash-es';
+let throttle = require('lodash.throttle');
 
 const SCROLL_REFRESH_INTERVAL = 17;
 
