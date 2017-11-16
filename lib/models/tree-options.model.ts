@@ -3,7 +3,7 @@ import { TreeModel } from './tree.model';
 import { KEYS } from '../constants/keys';
 import { ITreeOptions } from '../defs/api';
 
-let defaultsDeep = require('lodash.defaultsDeep');
+let defaultsDeep = require('lodash.defaultsdeep');
 
 export interface IActionHandler {
   (tree: TreeModel, node: TreeNode, $event: any, ...rest);
