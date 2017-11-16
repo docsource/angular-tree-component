@@ -3,7 +3,9 @@ import { TreeModel } from './tree.model';
 import { KEYS } from '../constants/keys';
 import { ITreeOptions } from '../defs/api';
 
-import * as _ from 'lodash';
+let defaultsDeep = require('lodash.defaultsdeep');
+let omit = require('lodash.omit');
+let lodashGet = require('lodash.get');
 
 export interface IActionHandler {
   (tree: TreeModel, node: TreeNode, $event: any, ...rest);
@@ -86,10 +88,10 @@ export class TreeOptions {
   actionMapping: IActionMapping;
 
   constructor(private options: ITreeOptions = {}) {
-    this.actionMapping = _.defaultsDeep({}, this.options.actionMapping, defaultActionMapping);
+    this.actionMapping = defaultsDeep({}, this.options.actionMapping, defaultActionMapping);
     if (options.rtl) {
-      this.actionMapping.keys[KEYS.RIGHT] = <IActionHandler>_.get(options, ['actionMapping', 'keys', KEYS.RIGHT]) || TREE_ACTIONS.DRILL_UP;
-      this.actionMapping.keys[KEYS.LEFT] = <IActionHandler>_.get(options, ['actionMapping', 'keys', KEYS.LEFT]) || TREE_ACTIONS.DRILL_DOWN;
+      this.actionMapping.keys[KEYS.RIGHT] = lodashGet(options, ['actionMapping', 'keys', KEYS.RIGHT]) || TREE_ACTIONS.DRILL_UP;
+      this.actionMapping.keys[KEYS.LEFT] = lodashGet(options, ['actionMapping', 'keys', KEYS.LEFT]) || TREE_ACTIONS.DRILL_DOWN;
     }
   }
 
@@ -98,7 +100,7 @@ export class TreeOptions {
       return this.options.getNodeClone(node);
     }
 
-    return _.omit(Object.assign({}, node.data), ['id']);
+    return omit(Object.assign({}, node.data), ['id']);
   }
 
   allowDrop(element, to, $event?): boolean {

@@ -8,9 +8,7 @@ import { TreeDraggedElement } from '../models/tree-dragged-element.model';
 import { TreeOptions } from '../models/tree-options.model';
 import { TreeViewportComponent } from './tree-viewport.component';
 
-import * as _ from 'lodash';
-
-const { includes, pick }  = _;
+let pick = require('lodash.pick');
 
 @Component({
   selector: 'Tree, tree-root',
@@ -94,8 +92,8 @@ export class TreeComponent implements OnChanges {
   @HostListener('body: keydown', ['$event'])
   onKeydown($event) {
     if (!this.treeModel.isFocused) return;
-    if (includes(['input', 'textarea'],
-        document.activeElement.tagName.toLowerCase())) return;
+    let tagName = document.activeElement.tagName.toLowerCase();
+    if (['input', 'textarea'].indexOf(tagName) !== -1) return;
 
     const focusedNode = this.treeModel.getFocusedNode();
 

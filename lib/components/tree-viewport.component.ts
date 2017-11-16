@@ -4,6 +4,10 @@ import {
 import { TreeVirtualScroll } from '../models/tree-virtual-scroll.model';
 import { TREE_EVENTS } from '../constants/events';
 
+const SCROLL_REFRESH_INTERVAL = 17;
+
+const isFirefox = navigator && navigator.userAgent && navigator.userAgent.indexOf('Firefox') > -1;
+
 @Component({
   selector: 'tree-viewport',
   providers: [TreeVirtualScroll],
