@@ -52,7 +52,8 @@
   ],
   "readme": "https://github.com/500tech/angular-tree-component/blob/master/README.md",
   "contributors": [
-    "Adam Klein <adam@500tech.com>"
+    "Adam Klein <adam@500tech.com>",
+    "Brandon Slade <brandonyoyoslade@gmail.com>"
   ],
   "dependencies": {
     "@types/lodash.compact": "^3.0.3",
