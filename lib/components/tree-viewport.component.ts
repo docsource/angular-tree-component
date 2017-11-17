@@ -6,7 +6,6 @@ import { TREE_EVENTS } from '../constants/events';
 
 @Component({
   selector: 'tree-viewport',
-  styles: [],
   providers: [TreeVirtualScroll],
   template: `
     <ng-container *mobxAutorun="{dontDetach: true}">

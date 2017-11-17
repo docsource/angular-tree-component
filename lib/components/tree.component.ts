@@ -15,7 +15,6 @@ const { includes, pick }  = _;
 @Component({
   selector: 'Tree, tree-root',
   providers: [TreeModel],
-  styles: [],
   template: `
     <tree-viewport #viewport>
       <div
