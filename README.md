@@ -1,7 +1,6 @@
-[![Build Status](https://travis-ci.org/500tech/angular-tree-component.svg?branch=master)](https://travis-ci.org/500tech/angular-tree-component)
-[![npm version](https://badge.fury.io/js/angular-tree-component.svg)](https://badge.fury.io/js/angular-tree-component)
+[![Build Status](https://travis-ci.org/gitsupportio/angular-tree-component.svg?branch=master)](https://travis-ci.org/gitsupportio/angular-tree-component)
 
-# angular tree component
+# @gitsupport/angular tree component
 
 ## A full featured tree component for Angular (2, 4, 5)
 We've built so many projects that required a tree component, and could never find a library that supported all features.
@@ -44,7 +43,7 @@ Thanks
 ## Example
 To run the example:
 ```
-git clone https://github.com/500tech/angular-tree-component
+git clone https://github.com/gitsupportio/angular-tree-component
 
 cd angular-tree-component/example/cli
 npm install
