@@ -21,7 +21,7 @@ import { TreeNode } from '../models/tree-node.model';
 
         <tree-node-wrapper [node]="node" [index]="index" [templates]="templates"></tree-node-wrapper>
 
-        <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+        <tree-node-children *ngIf="nodeHasChildren" [node]="node" [templates]="templates"></tree-node-children>
         <tree-node-drop-slot [dropIndex]="node.index + 1" [node]="node.parent"></tree-node-drop-slot>
       </div>
       <ng-container
@@ -35,4 +35,8 @@ export class TreeNodeComponent {
   @Input() node: TreeNode;
   @Input() index: number;
   @Input() templates: any;
+
+  get nodeHasChildren(){
+    return this.node.children && this.node.children.length > 0;
+  }
 }
