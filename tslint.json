@@ -1,7 +1,7 @@
 {
   "rules": {
       "adjacent-overload-signatures": true,
-      "no-var-requires": true,
+      "no-var-requires": false,
       
       "no-console": [true],
       "no-debugger": true,
