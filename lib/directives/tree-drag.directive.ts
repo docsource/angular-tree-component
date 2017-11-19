@@ -21,6 +21,7 @@ export class TreeDragDirective implements DoCheck {
     // setting the data is required by firefox
     ev.dataTransfer.setData('text', ev.target.id);
     this.treeDraggedElement.set(this.draggedElement);
+    this.treeDraggedElement.setDragEvent(ev);
     if (this.draggedElement.mouseAction) {
         this.draggedElement.mouseAction('dragStart', ev);
     }
