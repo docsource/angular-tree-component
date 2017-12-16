@@ -37,6 +37,7 @@ export const TREE_ACTIONS = {
 const defaultActionMapping: IActionMapping = {
   mouse: {
     click: TREE_ACTIONS.TOGGLE_SELECTED,
+    auxclick: null,
     dblClick: null,
     contextMenu: null,
     expanderClick: TREE_ACTIONS.TOGGLE_EXPANDED,
@@ -55,6 +56,7 @@ const defaultActionMapping: IActionMapping = {
 export interface IActionMapping {
   mouse?: {
     click?: IActionHandler,
+    auxclick?: IActionHandler,
     dblClick?: IActionHandler,
     contextMenu?: IActionHandler,
     expanderClick?: IActionHandler,
