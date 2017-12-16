@@ -38,6 +38,7 @@ export const TREE_ACTIONS = {
 const defaultActionMapping: IActionMapping = {
   mouse: {
     click: TREE_ACTIONS.TOGGLE_ACTIVE,
+    auxclick: null,
     dblClick: null,
     contextMenu: null,
     expanderClick: TREE_ACTIONS.TOGGLE_EXPANDED,
@@ -57,6 +58,7 @@ const defaultActionMapping: IActionMapping = {
 export interface IActionMapping {
   mouse?: {
     click?: IActionHandler,
+    auxclick?: IActionHandler,
     dblClick?: IActionHandler,
     contextMenu?: IActionHandler,
     expanderClick?: IActionHandler,
@@ -145,6 +147,6 @@ export class TreeOptions {
   }
 
   get dropSlotHeight(): number {
-    return _.isNumber(this.options.dropSlotHeight) ? this.options.dropSlotHeight : 2;
+    return (typeof this.options.dropSlotHeight === 'number') ? this.options.dropSlotHeight : 2;
   }
 }
