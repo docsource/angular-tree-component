@@ -230,9 +230,10 @@ export class TreeModel implements ITreeModel {
       }
       else {
         nextNode.focus();
-        break;
+        return;
       }
     }
+    this.fireEvent({ eventName: TREE_EVENTS.noNextNode });
   }
 
   @action focusPreviousNode() {
@@ -244,9 +245,10 @@ export class TreeModel implements ITreeModel {
       }
       else {
         nextNode.focus();
-        break;
+        return;
       }
     }
+    this.fireEvent({ eventName: TREE_EVENTS.noPreviousNode });
   }
 
   @action focusDrillDown() {
