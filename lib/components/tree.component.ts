@@ -82,6 +82,8 @@ export class TreeComponent implements OnChanges {
   @Output() changeFilter;
   @Output() event;
   @Output() stateChange;
+  @Output() noPreviousNode;
+  @Output() noNextNode;
 
   constructor(
     public treeModel: TreeModel,
