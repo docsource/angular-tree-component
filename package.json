@@ -1,7 +1,7 @@
 {
   "name": "@gitsupport/angular-tree-component",
-  "version": "5.2.5",
-  "description": "A simple yet powerful tree component for Angular2",
+  "version": "5.2.6",
+  "description": "A simple yet powerful tree component for Angular",
   "author": "Adam Klein <adam@500tech.com>",
   "homepage": "https://github.com/gitsupportio/angular-tree-component",
   "license": "MIT",
