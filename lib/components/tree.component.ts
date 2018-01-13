@@ -67,23 +67,23 @@ export class TreeComponent implements OnChanges {
     this.treeModel.setState(state);
   }
 
-  @Output() toggleExpanded;
-  @Output() activate;
-  @Output() deactivate;
-  @Output() select;
-  @Output() deselect;
-  @Output() focus;
-  @Output() blur;
-  @Output() updateData;
-  @Output() initialized;
-  @Output() moveNode;
-  @Output() copyNode;
-  @Output() loadNodeChildren;
-  @Output() changeFilter;
-  @Output() event;
-  @Output() stateChange;
-  @Output() noPreviousNode;
-  @Output() noNextNode;
+  @Output() toggleExpanded: EventEmitter<any>;
+  @Output() activate: EventEmitter<any>;
+  @Output() deactivate: EventEmitter<any>;
+  @Output() select: EventEmitter<any>;
+  @Output() deselect: EventEmitter<any>;
+  @Output() focus: EventEmitter<any>;
+  @Output() blur: EventEmitter<any>;
+  @Output() updateData: EventEmitter<any>;
+  @Output() initialized: EventEmitter<any>;
+  @Output() moveNode: EventEmitter<any>;
+  @Output() copyNode: EventEmitter<any>;
+  @Output() loadNodeChildren: EventEmitter<any>;
+  @Output() changeFilter: EventEmitter<any>;
+  @Output() event: EventEmitter<any>;
+  @Output() stateChange: EventEmitter<any>;
+  @Output() noPreviousNode: EventEmitter<any>;
+  @Output() noNextNode: EventEmitter<any>;
 
   constructor(
     public treeModel: TreeModel,
