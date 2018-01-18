@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/gitsupportio/angular-tree-component.svg?branch=master)](https://travis-ci.org/gitsupportio/angular-tree-component)
+[![Build Status](https://travis-ci.org/docsource/angular-tree-component.svg?branch=master)](https://travis-ci.org/docsource/angular-tree-component)
 
-# @gitsupport/angular tree component
+# @docsource/angular-tree-component
 
 ## A full featured tree component for Angular (2, 4, 5)
 We've built so many projects that required a tree component, and could never find a library that supported all features.

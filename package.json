@@ -1,9 +1,9 @@
 {
-  "name": "@gitsupport/angular-tree-component",
+  "name": "@docsource/angular-tree-component",
   "version": "5.2.8",
   "description": "A simple yet powerful tree component for Angular",
   "author": "Adam Klein <adam@500tech.com>",
-  "homepage": "https://github.com/gitsupportio/angular-tree-component",
+  "homepage": "https://github.com/docsource/angular-tree-component",
   "license": "MIT",
   "main": "dist/angular-tree-component.umd.js",
   "js:next": "dist/angular-tree-component.js",
@@ -124,9 +124,9 @@
     "typescript": "2.4.2",
     "zone.js": "^0.8.4"
   },
-  "repository": "https://github.com/gitsupportio/angular-tree-component.git",
+  "repository": "https://github.com/docsource/angular-tree-component.git",
   "bugs": {
-    "url": "https://github.com/gitsupportio/angular-tree-component/issues"
+    "url": "https://github.com/docsource/angular-tree-component/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
