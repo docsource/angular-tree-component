@@ -1,4 +1,4 @@
-import { Directive, Output, Input, EventEmitter, HostListener, Renderer, ElementRef } from '@angular/core';
+import { Directive, Output, Input, EventEmitter, HostListener, Renderer, ElementRef, NgZone } from '@angular/core';
 import { TreeDraggedElement } from '../models/tree-dragged-element.model';
 
 const DRAG_OVER_CLASS = 'is-dragging-over';
@@ -24,10 +24,24 @@ export class TreeDropDirective {
     return this._allowDrop(this.treeDraggedElement.get(), $event);
   }
 
-  constructor(private el: ElementRef, private renderer: Renderer, private treeDraggedElement: TreeDraggedElement) {
+  constructor(private el: ElementRef, private renderer: Renderer, private treeDraggedElement: TreeDraggedElement, private zone: NgZone) {
   }
 
-  @HostListener('dragover', ['$event']) onDragOver($event) {
+  ngAfterViewInit() {
+    this.zone.runOutsideAngular(() => {
+      let el = <HTMLElement>this.el.nativeElement!;
+      el.addEventListener('dragover', this.onDragOver.bind(this));
+      el.addEventListener('dragenter', this.onDragEnter.bind(this));
+      el.addEventListener('dragleave', this.onDragLeave.bind(this));
+    });
+  }
+
+  /**
+   * This event is run outside of angular.
+   * If the mouse action makes changes to application state,
+   * it should manually trigger change detection
+   */
+  onDragOver($event) {
     if (!this.allowDrop($event)) return this.addDisabledClass();
 
     this.onDragOverCallback.emit({event: $event, element: this.treeDraggedElement.get()});
@@ -36,13 +50,23 @@ export class TreeDropDirective {
     this.addClass();
   }
 
-  @HostListener('dragenter', ['$event']) onDragEnter($event) {
+  /**
+   * This event is run outside of angular.
+   * If the mouse action makes changes to application state,
+   * it should manually trigger change detection
+   */
+  onDragEnter($event) {
     if (!this.allowDrop($event)) return;
 
     this.onDragEnterCallback.emit({event: $event, element: this.treeDraggedElement.get()});
   }
 
-  @HostListener('dragleave', ['$event']) onDragLeave($event) {
+  /**
+   * This event is run outside of angular.
+   * If the mouse action makes changes to application state,
+   * it should manually trigger change detection
+   */
+  onDragLeave($event) {
     if (!this.allowDrop($event)) return this.removeDisabledClass();
 
     this.onDragLeaveCallback.emit({event: $event, element: this.treeDraggedElement.get()});

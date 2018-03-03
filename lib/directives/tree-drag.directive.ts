@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, Renderer, ElementRef, DoCheck } from '@angular/core';
+import { Directive, Input, HostListener, Renderer, ElementRef, DoCheck, NgZone } from '@angular/core';
 import { TreeDraggedElement } from '../models/tree-dragged-element.model';
 
 const DRAG_OVER_CLASS = 'is-dragging-over';
@@ -10,7 +10,14 @@ export class TreeDragDirective implements DoCheck {
   @Input('treeDrag') draggedElement;
   @Input() treeDragEnabled;
 
-  constructor(private el: ElementRef, private renderer: Renderer, private treeDraggedElement: TreeDraggedElement) {
+  constructor(private el: ElementRef, private renderer: Renderer, private treeDraggedElement: TreeDraggedElement, private zone: NgZone) {
+  }
+
+  ngAfterViewInit() {
+    let el: HTMLElement = this.el.nativeElement!;
+    this.zone.runOutsideAngular(() => {
+      el.addEventListener('drag', this.onDrag.bind(this));
+    });
   }
 
   ngDoCheck() {
@@ -27,7 +34,12 @@ export class TreeDragDirective implements DoCheck {
     }
   }
 
-  @HostListener('drag', ['$event']) onDrag(ev) {
+  /**
+   * This event is run outside of angular.
+   * If the mouse action makes changes to application state,
+   * it should manually trigger change detection
+   */
+  onDrag(ev) {
     if (this.draggedElement.mouseAction) {
         this.draggedElement.mouseAction('drag', ev);
     }
